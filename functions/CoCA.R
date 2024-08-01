@@ -1,5 +1,5 @@
 
-# This function computes the solution to the optimization problem:
+# Computes the solution to the optimization problem in the CoCA framework:
 # 
 # min ||X - u v^{T}||_F^2 + rho D(v) s.t. ||u||^2 <= 1
 #
