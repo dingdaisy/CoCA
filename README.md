@@ -18,18 +18,19 @@ install.packages(c("glmnet", "Matrix"))
 ```
 source("functions/CoCA.R")
 source("functions/sparse_CoCA.R")
+source("functions/utils.R")
 ```
 3. **Running an Example**: Here's a basic example of how to apply the sparse CoCA method.
 ```
-# Example data matrix X with multiple views
-X <- matrix(rnorm(100 * 20), nrow = 100, ncol = 20)
+# Example data matrix X with multiple views, generated from a latent factor model.
 
-# Indices partitioning the variables into two views
-indices <- c(1:10, 11:20)
+load("data/simData1.RData")
+X <- simData1$X # The combined data matrix
+indices <- simData1$i # Indices partitioning the variables into two views
 
 # Penalty parameters
-rho <- 0.5
-lambda <- 0.1
+rho <- 0.01
+lambda <- 0.01
 
 # Apply the sparse CoCA method
 fit_coca <- sparse_coca(X, indices, rho, lambda)
