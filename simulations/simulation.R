@@ -142,6 +142,7 @@ simData1 <- list(
   X = X,
   i = 1:pu,
   W = W,
+  beta = beta,
   noise_cov = noise_cov,
   n = n,
   pu = pu,
