@@ -24,3 +24,20 @@ twoNorm <- function(x){
   sqrt(sum(x^2))
 }
 
+# Computes the Mean Squared Error (MSE) between the estimated factor and the true factor.
+evaluate_mse <- function(bh, beta) {
+  
+  ##############################################################
+  # Args:
+  #   bh: A numeric vector representing the estimated factor.
+  #   beta: A numeric vector representing the true factor.
+  #
+  # Returns:
+  #   A numeric value representing the MSE between the estimated factor (bh) and the true factor (beta).
+  #   The function ensures that the comparison accounts for the sign ambiguity by taking the minimum
+  #   of the squared differences between bh and beta, and bh and -beta.
+  ##############################################################
+  
+  min(sum((bh - beta)^2), sum((-bh - beta)^2))
+}
+

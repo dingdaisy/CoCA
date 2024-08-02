@@ -21,7 +21,7 @@
 # - v: A numeric vector representing the learned coefficients of the component, of dimension p.
 # - u: A numeric vector corresponding to the learned scores of the component, of dimension n.
 
-run_coca = function(X,i,rho,eps = 1e-6,maxiter = 100,debug = F){
+fit_coca = function(X,i,rho,eps = 1e-6,maxiter = 100,debug = F){
   
   if(debug) browser()
   
