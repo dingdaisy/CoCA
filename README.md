@@ -24,20 +24,22 @@ source("functions/utils.R")
 ```
 # Example data matrix X with multiple views, generated from a latent factor model.
 
-load("data/simData1.RData")
-X <- simData1$X # The combined data matrix
-indices <- simData1$i # Indices partitioning the variables into two views
+load("data/simData2.RData")
+X <- simData2$X # The combined data matrix
+indices <- simData2$i # Indices partitioning the variables into two views
 
 # Penalty parameters
 rho <- 0.01
 lambda <- 0.01
 
 # Apply the sparse CoCA method
-fit_coca <- sparse_coca(X, indices, rho, lambda)
+result <- sparse_coca(X, indices, rho, lambda)
 
 # Access the results
 coca_coef <- result$v  # Coefficients of the identified component
 ```
+
+For more detailed examples, see the example scripts: ```examples/example_CoCA.R``` and ```examples/example_sparse_CoCA.R```.
 
 # Directory structure:
 The repository is structured as follows:
