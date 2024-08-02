@@ -124,8 +124,8 @@ ave_population_loss = colMeans(population_loss)
 ave_loss_recon = colMeans(recon_error_test - test_loss_true_list)
 ave_loss_recon_pop = colMeans(recon_error_test_pop - test_loss_true_list)
 
-# Plot estimation error and reconstruction error
-par(mfrow = c(1, 2))
+# Plot estimation error
+par(mfrow = c(1, 1))
 plot(log(rhos),
      log(ave_loss),
      main = "Estimation error",
@@ -136,14 +136,19 @@ plot(log(rhos),
      ylim = c(min(log(ave_loss))-0.1, max(log(ave_loss))))
 abline(v = log(rhos)[which.min(ave_loss)],lty = 2)
 
-plot(log(rhos),
-     log(ave_loss_recon),
-     main = "Reconstruction error",
-     ylab = "log(reconstruction error)",
-     xlab = expression(log(rho)),
-     cex.lab = 1.5,
-     cex.main = 1.5,
-     ylim = c(min(log(ave_loss_recon))-0.1, max(log(ave_loss_recon))))
-abline(v = log(rhos)[which.min(ave_loss_recon)],lty = 2)
+
+# Save simulation data
+simData1 <- list(
+  X = X,
+  i = 1:pu,
+  W = W,
+  noise_cov = noise_cov,
+  n = n,
+  pu = pu,
+  pv = pv,
+  rhos = rhos
+)
+save(simData1, file = "./../data/simData1.RData")
+
 
 
