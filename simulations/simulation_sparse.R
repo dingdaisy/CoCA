@@ -185,6 +185,6 @@ plot(log(rhos), log(ave_loss_by_rho),
      col = "black")
 
 # Add vertical dashed line at the minimum log_ave_loss_by_rho
-abline(v = log_rhos[which.min(log_ave_loss_by_rho)], col = "black", lty = 2)
+abline(v = log(rhos)[which.min(ave_loss_by_rho)], col = "black", lty = 2)
 
 

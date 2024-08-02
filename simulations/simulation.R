@@ -149,7 +149,7 @@ simData1 <- list(
   pv = pv,
   rhos = rhos
 )
-save(simData1, file = "./../data/simData1.RData")
+#save(simData1, file = "./../data/simData1.RData")
 
 
 

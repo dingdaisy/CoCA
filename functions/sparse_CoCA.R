@@ -110,7 +110,6 @@ sparse_coca_cv <- function(X, rhos, n_lambdas, nfolds, pu, pv, eps = 1e-8, maxit
   p = pu + pv
   n = nrow(X)
   
-  set.seed(seed)
   # Loop over each rho value
   for (ii in 1:length(rhos)) {
     fits = list()
@@ -153,7 +152,7 @@ sparse_coca_cv <- function(X, rhos, n_lambdas, nfolds, pu, pv, eps = 1e-8, maxit
         start <- if (jj == 1) nosparse_fold$u else fits[[jj - 1]]$u
         
         # Fit sparse CoCA on the training data
-        fits[[jj]] <- sparse_coca(X_train, i = 1:pu, rho = rhos[ii], lambda = lambdas[ii, jj], start = start, eps = eps, maxiter = maxiter, debug = F)
+        fits[[jj]] <- sparse_coca(X_train, i = 1:pu, rho = rhos[ii], lambda = lambdas[ii, jj], start = start, eps = eps, maxiter = maxiter, seed=seed, debug = F)
         
         # Evaluate on validation data for reconstruction error
         fold_errors <- mean((proj_vector(X_valid, normalize_vector(fits[[jj]]$v)) - X_valid)^2) 
@@ -206,6 +205,8 @@ plot_cv_coca <- function(coca_results, by = "mean_error") {
          pch = 19, # Solid circle
          cex = 0.7,  # Size of points
          col = "black")
+    # Add vertical dashed line at the best performance
+    abline(v = log(coca_results$rhos)[which.min(ave_loss_by_rho)], col = "black", lty = 2)
     
   } else if (by == "median_error") {
     ave_loss_by_rho = apply(coca_results$median_errors,1,min)
@@ -216,6 +217,9 @@ plot_cv_coca <- function(coca_results, by = "mean_error") {
          pch = 19, # Solid circle
          cex = 0.7,  # Size of points
          col = "black")
+    # Add vertical dashed line at the best performance
+    abline(v = log(coca_results$rhos)[which.min(ave_loss_by_rho)], col = "black", lty = 2)
+    
   } else {
     stop("Invalid 'by' argument. Please specify 'mean_error' or 'median_error'.")
   }
