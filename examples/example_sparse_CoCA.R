@@ -8,7 +8,7 @@ source("./../functions/utils.R")
 # Load the simulated data
 
 ############################################################################
-# simData1 is a pre-generated dataset for testing the CoCA framework, 
+# simData2 is a pre-generated dataset for testing the CoCA framework, 
 # generated from the latent factor model:
 #
 # x = (u,v) ~ (beta_u,beta_v) z  + Eta_u %*% zu  + Eta_v %*% zv  +  w, 

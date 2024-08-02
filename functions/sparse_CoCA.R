@@ -26,7 +26,7 @@ library(glmnet)
 # - v: A numeric vector representing the learned coefficients of the component, of dimension p.
 # - u: A numeric vector corresponding to the learned scores of the component, of dimension n.
 
-sparse_coca = function(X,i,rho,lambda = 0,start = NULL,eps = 1e-8,maxiter = 100,debug = F){
+sparse_coca = function(X,i,rho,lambda = 0,start = NULL,eps = 1e-8,maxiter = 100,debug = F,seed=1){
   
   if(debug) browser()
   
@@ -48,6 +48,7 @@ sparse_coca = function(X,i,rho,lambda = 0,start = NULL,eps = 1e-8,maxiter = 100,
   # Iterate until convergence
   iter = 1
   uo = rep(0,n); vo = v = rep(0,p)
+  set.seed(seed)
   while( sum((uo - u)^2)/sum(u^2) > eps^2 | sum((vo - v)^2)/sum(v^2) > eps^2)
   {
     # Old to new
@@ -100,7 +101,7 @@ sparse_coca = function(X,i,rho,lambda = 0,start = NULL,eps = 1e-8,maxiter = 100,
 #     best_rho_median: The rho value with the minimum median error.
 #     best_lambda_median: The lambda value with the minimum median error.
 
-sparse_coca_cv <- function(X, rhos, n_lambdas, nfolds, pu, pv, eps = 1e-8, maxiter = 100) {
+sparse_coca_cv <- function(X, rhos, n_lambdas, nfolds, pu, pv, eps = 1e-8, maxiter = 100, seed=1) {
   
   # Create folds for cross-validation
   folds <- cut(seq(1, nrow(X)), breaks = nfolds, labels = FALSE)
@@ -109,6 +110,7 @@ sparse_coca_cv <- function(X, rhos, n_lambdas, nfolds, pu, pv, eps = 1e-8, maxit
   p = pu + pv
   n = nrow(X)
   
+  set.seed(seed)
   # Loop over each rho value
   for (ii in 1:length(rhos)) {
     fits = list()
