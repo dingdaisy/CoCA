@@ -8,7 +8,7 @@ To learn more about the method, please refer to our manuscript:
 Daisy Yi Ding*, Alden Green*, Min Woo Sun, and Robert Tibshirani. "CoCA: Cooperative Component Analysis." arXiv preprint arXiv:2407.16870 (2024). [Link.](https://arxiv.org/abs/2407.16870)
 
 # Usage:
-To get started with the COCA framework, follow these steps:
+To get started with the CoCA framework, follow these steps:
 
 1. **Installation**: Ensure you have the necessary R packages (i.e. glmnet, Matrix, etc). You can install them using:
 ```
@@ -23,14 +23,13 @@ source("functions/utils.R")
 3. **Running an Example**: Here's a basic example of how to apply the sparse CoCA method.
 ```
 # Example data matrix X with multiple views, generated from a latent factor model.
-
 load("data/simData2.RData")
 X <- simData2$X # The combined data matrix
 indices <- simData2$i # Indices partitioning the variables into two views
 
 # Penalty parameters
 rho <- 0.01
-lambda <- 0.01
+lambda <- 0.005
 
 # Apply the sparse CoCA method
 result <- sparse_coca(X, indices, rho, lambda)
